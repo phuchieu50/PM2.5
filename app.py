@@ -16,8 +16,8 @@ predict_case = st.selectbox("Lựa chọn trường hợp dự đoán",
 model_file = {'Mô phỏng': 'S_ANN_6.keras', 
            'Sớm 1 ngày': 'P1_ANN_4.keras',
            'Sớm 3 ngày': 'P3_ANN_5.keras', 
-           'Sớm 5 ngày': 'P5_ANN_3.keras', 
-           'Sớm 7 ngày': 'P7_ANN_2.keras'
+           'Sớm 5 ngày': 'P5_ANN_6.keras', 
+           'Sớm 7 ngày': 'P7_ANN_6.keras'
            }
 model_info = {}
 
@@ -59,15 +59,25 @@ elif predict_case == "Sớm 5 ngày":
     with col1:
         humidity = st.number_input("Độ ẩm (%)", min_value=0.0, max_value=100.0, value=50.0, step=0.5)
         temperature = st.number_input("Nhiệt độ (°C)", min_value=-20.0, max_value=50.0, value=25.0, step=0.5)
+        wind_speed = st.number_input("Tốc độ gió (m/s)", min_value=0.0, max_value=50.0, value=3.0, step=0.5)
     with col2:
+        rainfall = st.number_input("Lượng mưa (mm)", min_value=0.0, max_value=500.0, value=0.0, step=0.5)
         evaporation = st.number_input("Độ bốc hơi (mm)", min_value=0.0, max_value=50.0, value=5.0, step=0.5)
-    model_info = (model_file.get(predict_case), [humidity, temperature, evaporation])
+        sunshine = st.number_input("Số giờ nắng (giờ)", min_value=0.0, max_value=24.0, value=6.0, step=0.5)
+    model_info = (model_file.get(predict_case), 
+                  [humidity, temperature, wind_speed, rainfall, evaporation, sunshine])
 
 elif predict_case == "Sớm 7 ngày":
     with col1:
         humidity = st.number_input("Độ ẩm (%)", min_value=0.0, max_value=100.0, value=50.0, step=0.5)
         temperature = st.number_input("Nhiệt độ (°C)", min_value=-20.0, max_value=50.0, value=25.0, step=0.5)
-    model_info = (model_file.get(predict_case), [humidity, temperature])
+        wind_speed = st.number_input("Tốc độ gió (m/s)", min_value=0.0, max_value=50.0, value=3.0, step=0.5)
+    with col2:
+        rainfall = st.number_input("Lượng mưa (mm)", min_value=0.0, max_value=500.0, value=0.0, step=0.5)
+        evaporation = st.number_input("Độ bốc hơi (mm)", min_value=0.0, max_value=50.0, value=5.0, step=0.5)
+        sunshine = st.number_input("Số giờ nắng (giờ)", min_value=0.0, max_value=24.0, value=6.0, step=0.5)
+    model_info = (model_file.get(predict_case), 
+                  [humidity, temperature, wind_speed, rainfall, evaporation, sunshine])
 ################################################################
 
 
